@@ -1,0 +1,9 @@
+.vscode/*
+Library/*
+Temp/*
+Logs/*
+AndroidBuild/*
+
+*.csproj
+*.sln
+*.vscode
