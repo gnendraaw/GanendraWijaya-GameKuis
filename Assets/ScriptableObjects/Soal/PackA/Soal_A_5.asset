@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c247375a1d18fd04fa7df9222dc98cc9, type: 3}
-  m_Name: Soal3
+  m_Name: Soal_A_5
   m_EditorClassIdentifier: 
-  hint: {fileID: 21300000, guid: 09b0adca6ffd7374ab6bce75adee3b3a, type: 3}
-  pertanyaan: Warna dari Mawar?
+  hint: {fileID: 21300000, guid: 62a4c5741b1561c4c8de4f2eeb96d9f9, type: 3}
+  pertanyaan: Warna dari Laut?
   opsiJawaban:
-  - jawabanTeks: Ungu
+  - jawabanTeks: Merah
     adalahBenar: 0
   - jawabanTeks: Biru
-    adalahBenar: 0
-  - jawabanTeks: Merah
     adalahBenar: 1
+  - jawabanTeks: Hijau
+    adalahBenar: 0
   - jawabanTeks: Kuning
     adalahBenar: 0

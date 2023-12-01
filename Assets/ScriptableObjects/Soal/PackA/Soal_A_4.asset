@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c247375a1d18fd04fa7df9222dc98cc9, type: 3}
-  m_Name: Soal4
+  m_Name: Soal_A_4
   m_EditorClassIdentifier: 
-  hint: {fileID: 21300000, guid: 1d386951fe15ff24188055af818682ba, type: 3}
-  pertanyaan: Warna dari Langit?
+  hint: {fileID: 21300000, guid: 3cb1045f82cfff64fa992e4df1eb2561, type: 3}
+  pertanyaan: Warna dari Matahari?
   opsiJawaban:
   - jawabanTeks: Merah
     adalahBenar: 0
-  - jawabanTeks: Ungu
+  - jawabanTeks: Biru
     adalahBenar: 0
   - jawabanTeks: Hijau
     adalahBenar: 0
-  - jawabanTeks: Biru
+  - jawabanTeks: Kuning
     adalahBenar: 1

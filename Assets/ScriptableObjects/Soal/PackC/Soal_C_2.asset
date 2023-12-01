@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c247375a1d18fd04fa7df9222dc98cc9, type: 3}
-  m_Name: Soal2
+  m_Name: Soal_C_2
   m_EditorClassIdentifier: 
-  hint: {fileID: 21300000, guid: 62a4c5741b1561c4c8de4f2eeb96d9f9, type: 3}
-  pertanyaan: Warna dari Laut?
+  hint: {fileID: 21300000, guid: 3cb1045f82cfff64fa992e4df1eb2561, type: 3}
+  pertanyaan: Warna dari Matahari?
   opsiJawaban:
-  - jawabanTeks: Jingga
-    adalahBenar: 0
-  - jawabanTeks: Pink
-    adalahBenar: 0
   - jawabanTeks: Merah
     adalahBenar: 0
   - jawabanTeks: Biru
+    adalahBenar: 0
+  - jawabanTeks: Hijau
+    adalahBenar: 0
+  - jawabanTeks: Kuning
     adalahBenar: 1

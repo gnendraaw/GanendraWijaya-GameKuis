@@ -20,7 +20,7 @@ public class PlayerProgressSO : ScriptableObject {
     public string fileName = "playerprogress.txt";
     public string fileNameBinaryWriter = "playerProgressBinaryWriter.txt";
 
-    public void SimpanProgressLatihan() {
+    public void SavePlainProgressExercise() {
         // Sampel Data
         progressData.coin = 200;
         if (progressData.progressLevel == null) progressData.progressLevel = new();

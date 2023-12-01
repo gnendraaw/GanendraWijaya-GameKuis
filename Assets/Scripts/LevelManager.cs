@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour {
 
     private void Start() {
         // SAVING DATA EXERCISE
-        // _playerProgress.SimpanProgressLatihan();
+        // _playerProgress.SavePlainProgressExercise();
 
 
         // SAVE AND LOAD WITH BINARY WRITER READER
