@@ -10,7 +10,6 @@ public class UI_Jawaban : MonoBehaviour {
 
     public void PilihJawaban() {
         _tempatPesan.Pesan = $"Jawaban anda adalah {_teksJawaban.text} ({_adalahBenar})";
-        // Debug.Log($"Jawaban Anda adalah {_teksJawaban.text} ({_adalahBenar})");
     }
 
     public void SetJawaban(string teksJawaban, bool adalahBenar) {

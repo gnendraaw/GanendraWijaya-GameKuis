@@ -2567,31 +2567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e289cd83f3fed604ca9c5d10d5bb5393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soalSoal:
-  - hint: {fileID: 21300000, guid: b9089825b7a94f7458b700410efcb57b, type: 3}
-    pertanyaan: Warna dari Daun?
-    jawabanTeks:
-    - Pink
-    - Hijau
-    - Putih
-    - Ungu
-    adalahBenar: 00010000
-  - hint: {fileID: 21300000, guid: 62a4c5741b1561c4c8de4f2eeb96d9f9, type: 3}
-    pertanyaan: Warna dari Laut?
-    jawabanTeks:
-    - Merah
-    - Pink
-    - Ungu
-    - Biru
-    adalahBenar: 00000001
-  - hint: {fileID: 21300000, guid: 3cb1045f82cfff64fa992e4df1eb2561, type: 3}
-    pertanyaan: Warna dari Matahari?
-    jawabanTeks:
-    - Pink
-    - Merah
-    - Kuning
-    - Jingga
-    adalahBenar: 00000100
+  _playerProgress: {fileID: 11400000, guid: 2a35f09df7be0f4469a435d8b4f55ac6, type: 2}
+  _soalSoal: {fileID: 11400000, guid: e5752ad39b2391b48a1ea7b94ba9db25, type: 2}
   _tempatPertanyaan: {fileID: 1561069432}
   _tempatPilihanJawaban:
   - {fileID: 473471571}
@@ -3708,7 +3685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeBar: {fileID: 56268412}
   _waktuJawab: 30
-  _tempatPesan: {fileID: 0}
+  _tempatPesan: {fileID: 594438239}
 --- !u!1 &1990050565
 GameObject:
   m_ObjectHideFlags: 0
