@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c835c811e322a4a4398fd503535a4220, type: 3}
   m_Name: LevelPack3
   m_EditorClassIdentifier: 
+  _levelPackName: Level Pack 3
   _isiLevel:
   - {fileID: 11400000, guid: 98f2dd913200e86489c2f349090c8432, type: 2}
   - {fileID: 11400000, guid: 454272c3b9fb3574f9f72a8c2128aacb, type: 2}

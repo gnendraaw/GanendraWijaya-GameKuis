@@ -428,7 +428,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 224311496}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1247309956}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &224311496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2567,6 +2579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e289cd83f3fed604ca9c5d10d5bb5393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectedLevelSO: {fileID: 11400000, guid: 02558b7ecc5345c4a8d8358c9f6a5f9b, type: 2}
   _playerProgress: {fileID: 11400000, guid: 2a35f09df7be0f4469a435d8b4f55ac6, type: 2}
   _soalSoal: {fileID: 11400000, guid: e5752ad39b2391b48a1ea7b94ba9db25, type: 2}
   _tempatPertanyaan: {fileID: 1561069432}
