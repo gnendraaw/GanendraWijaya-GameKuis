@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class PlayerProgressManager : MonoBehaviour {
@@ -8,9 +10,16 @@ public class PlayerProgressManager : MonoBehaviour {
 
     public static event Action OnPlayerProgressUpdated;
 
-    [SerializeField] private PlayerProgressSO _playerProgressSO;
+    private const string SAVE_FILE_NAME = "PlayerProgress.xyz";
+    private const string SAVE_FILE_DIRECTORY = "Data";
 
-    public PlayerProgressSO PlayerProgressSO { get => _playerProgressSO; }
+    private PlayerProgress playerProgress = new PlayerProgress();
+    public PlayerProgress PlayerProgress {
+        get => playerProgress;
+        set {
+            playerProgress = value;
+        }
+    }
 
     private void Awake() {
         if (Instance == null) {
@@ -21,15 +30,46 @@ public class PlayerProgressManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        // Check apabila tidak berhasil memuat progress
-        if (!_playerProgressSO.MuatProgress()) {
-            // Membuat simpanan progress atau mengganti dengan yang baru
-            SavePlayerProgress();
+        LoadPlayerProgress();
+    }
+
+    private void SetInitialPlayerProgress() {
+        playerProgress.coins = 0;
+        SavePlayerProgress();
+    }
+
+    public void LoadPlayerProgress() {
+        string directory = $"{Application.persistentDataPath}/{SAVE_FILE_DIRECTORY}";
+        string path = $"{Application.persistentDataPath}/{SAVE_FILE_DIRECTORY}/{SAVE_FILE_NAME}";
+
+        if (!Directory.Exists(directory)) {
+            Directory.CreateDirectory(directory);
+            SetInitialPlayerProgress();
+            return;
         }
+
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(path, FileMode.Open);
+
+        playerProgress = formatter.Deserialize(stream) as PlayerProgress;
+
+        stream.Close();
+
+        OnPlayerProgressUpdated?.Invoke();
     }
 
     public void SavePlayerProgress() {
-        _playerProgressSO.SimpanProgress();
+        string path = $"{Application.persistentDataPath}/{SAVE_FILE_DIRECTORY}/{SAVE_FILE_NAME}";
+
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, playerProgress);
+
+        stream.Close();
+
         OnPlayerProgressUpdated?.Invoke();
     }
 }

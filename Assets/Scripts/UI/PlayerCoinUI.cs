@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,7 +17,7 @@ public class PlayerCoinUI : MonoBehaviour {
     }
 
     private void UpdateCoinVisual() {
-        coinText.text = PlayerProgressManager.Instance.PlayerProgressSO.progressData.coin.ToString();
+        coinText.text = PlayerProgressManager.Instance.PlayerProgress.coins.ToString();
     }
 }
 

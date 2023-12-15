@@ -39,6 +39,7 @@ public class UI_PesanLevel : MonoBehaviour {
 
     private void UI_Timer_OnTimerRunsOut() {
         Pesan = "Times UP!";
+        ToggleWinLoseOption(false);
         gameObject.SetActive(true);
     }
 }

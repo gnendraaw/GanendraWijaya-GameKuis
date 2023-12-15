@@ -52,7 +52,7 @@ public class LevelManager : MonoBehaviour {
 
     private void GrantCoin() {
         int coinToAdd = 20;
-        PlayerProgressManager.Instance.PlayerProgressSO.progressData.coin += coinToAdd;
+        PlayerProgressManager.Instance.PlayerProgress.coins += coinToAdd;
         PlayerProgressManager.Instance.SavePlayerProgress();
     }
 
