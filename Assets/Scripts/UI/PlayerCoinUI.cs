@@ -12,6 +12,10 @@ public class PlayerCoinUI : MonoBehaviour {
         UpdateCoinVisual();
     }
 
+    private void OnDestroy() {
+        PlayerProgressManager.OnPlayerProgressUpdated -= PlayerProgressManager_OnPlayerProgressUpdated;
+    }
+
     private void PlayerProgressManager_OnPlayerProgressUpdated() {
         UpdateCoinVisual();
     }
