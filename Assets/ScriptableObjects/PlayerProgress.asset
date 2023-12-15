@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
   progressData:
-    coin: 200
+    coin: 0
   fileNameLatihan: playerprogressLatihan.txt
   fileName: playerprogress.txt
+  fileNameBinaryWriter: playerProgressBinaryWriter.txt

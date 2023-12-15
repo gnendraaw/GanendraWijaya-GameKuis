@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Timer : MonoBehaviour {
+    public static event Action OnTimerRunsOut;
+
     [SerializeField] private Slider _timeBar;
     [SerializeField] private float _waktuJawab = 30f;
     [SerializeField] private UI_PesanLevel _tempatPesan;
@@ -28,9 +31,7 @@ public class UI_Timer : MonoBehaviour {
         _timeBar.value = _siswaWaktu / _waktuJawab;
 
         if (_siswaWaktu <= 0f) {
-            _tempatPesan.Pesan = "Waktu Habis!";
-            _tempatPesan.gameObject.SetActive(true);
-            // Debug.Log("Waktu Habis!");
+            OnTimerRunsOut?.Invoke();
             waktuBerjalan = false;
             return;
         }

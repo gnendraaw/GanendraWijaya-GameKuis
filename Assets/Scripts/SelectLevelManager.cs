@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectLevelManager : MonoBehaviour {
-    public static SelectLevelManager Instance { get; private set; }
-
     [SerializeField] private SelectedLevelSO _selectedLevelSO;
     [SerializeField] private List<LevelPackKuisSO> _levelPackSOList;
 
     public SelectedLevelSO SelectedLevelSO { get => _selectedLevelSO; }
-
-    public void Awake() {
-        Instance = this;
-    }
 
     public List<LevelPackKuisSO> GetLevelPackSOList() {
         return _levelPackSOList;

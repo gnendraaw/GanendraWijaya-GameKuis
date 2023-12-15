@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,8 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelPackSingleUI : MonoBehaviour {
-    public static event Action OnAnyLevelPackSelected;
-
+    [SerializeField] private LevelUI _levelUI;
+    [SerializeField] private LevelPackUI _levelPackUI;
+    [SerializeField] private SelectLevelManager _selectLevelManager;
     [SerializeField] private TextMeshProUGUI _levelPackName;
 
     private LevelPackKuisSO levelPackSO;
@@ -18,9 +18,10 @@ public class LevelPackSingleUI : MonoBehaviour {
 
         GetComponent<Button>().onClick.AddListener(() => {
             // Change selected level pack
-            SelectLevelManager.Instance.ChangeSelectedLevelPack(levelPackKuisSO);
+            _selectLevelManager.ChangeSelectedLevelPack(levelPackKuisSO);
 
-            OnAnyLevelPackSelected?.Invoke();
+            _levelUI.ShowLoadedLevel();
+            _levelPackUI.Hide();
         });
     }
 }

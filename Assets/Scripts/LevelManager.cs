@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
     [SerializeField] private SelectedLevelSO _selectedLevelSO;
-    [SerializeField] private PlayerProgressSO _playerProgress;
     [SerializeField] private LevelPackKuisSO _soalSoal;
     [SerializeField] private UI_Pertanyaan _tempatPertanyaan;
     [SerializeField] private UI_Jawaban[] _tempatPilihanJawaban;
@@ -12,14 +12,20 @@ public class LevelManager : MonoBehaviour {
     private int _indexSoal = 0;
 
     private void Start() {
-        // SAVE AND LOAD WITH BINARY FORMATTER
-        // Check apabila tidak berhasil memuat progress
-        if (!_playerProgress.MuatProgress()) {
-            // Membuat simpanan progress atau mengganti dengan yang baru
-            _playerProgress.SimpanProgress();
-        }
+        UI_Jawaban.OnAnyAnswerSelected += UI_Jawaban_OnAnyAnswerSelected;
 
         InitLevelData();
+    }
+
+    private void OnDestroy() {
+        UI_Jawaban.OnAnyAnswerSelected -= UI_Jawaban_OnAnyAnswerSelected;
+    }
+
+    private void UI_Jawaban_OnAnyAnswerSelected(string jawaban, bool isCorrect) {
+        // Grant player coins when the selected answer is correct
+        if (!isCorrect) return;
+
+        GrantCoin();
     }
 
     private void InitLevelData() {
@@ -44,9 +50,20 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    private void GrantCoin() {
+        int coinToAdd = 20;
+        PlayerProgressManager.Instance.PlayerProgressSO.progressData.coin += coinToAdd;
+        PlayerProgressManager.Instance.SavePlayerProgress();
+    }
+
+    private void SetLatestPlayerLevel() {
+        _selectedLevelSO.levelIndex = _indexSoal;
+    }
+
     public void NextLevel() {
         // Soal index selanjutnya
         _indexSoal++;
+        SetLatestPlayerLevel();
 
         // Jika index melampaui soal terakhir, ulangi dari awal
         if (_indexSoal >= _soalSoal.BanyakLevel) {
@@ -54,6 +71,14 @@ public class LevelManager : MonoBehaviour {
         }
 
         SetLevelQuestion();
+    }
+
+    public void ReturnToLevelSelect() {
+        Loader.LoadScene(Loader.TargetScene.SelectLevelScene);
+    }
+
+    public void RestartLevel() {
+        Loader.LoadScene(Loader.TargetScene.GameScene);
     }
 }
 

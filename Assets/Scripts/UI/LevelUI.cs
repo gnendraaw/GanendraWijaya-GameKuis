@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +6,8 @@ using UnityEngine.UI;
 public class LevelUI : MonoBehaviour {
     public static LevelUI Instance { get; private set; }
 
-    public static event Action OnCloseButtonClicked;
-
+    [SerializeField] private SelectLevelManager _selectLevelManager;
+    [SerializeField] private LevelPackUI _levelPackUI;
     [SerializeField] private Button _closeButton;
     [SerializeField] private Transform _levelContainer;
     [SerializeField] private Transform _levelTemplate;
@@ -17,22 +16,15 @@ public class LevelUI : MonoBehaviour {
         Instance = this;
 
         _closeButton.onClick.AddListener(() => {
-            OnCloseButtonClicked?.Invoke();
+            _levelPackUI.Show();
             Hide();
         });
     }
 
     private void Start() {
-        LevelPackSingleUI.OnAnyLevelPackSelected += LevelPackSingleUI_OnAnyLevelPackSelected;
-
         _levelTemplate.gameObject.SetActive(false);
 
         Hide();
-    }
-
-    private void LevelPackSingleUI_OnAnyLevelPackSelected() {
-        UpdateLevelVisual();
-        Show();
     }
 
     private void UpdateLevelVisual() {
@@ -41,7 +33,7 @@ public class LevelUI : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        int levelCount = SelectLevelManager.Instance.SelectedLevelSO.SelectedLevelPack.BanyakLevel;
+        int levelCount = _selectLevelManager.SelectedLevelSO.SelectedLevelPack.BanyakLevel;
         for (int i = 0; i < levelCount; i++) {
             Transform level = Instantiate(_levelTemplate, _levelContainer);
             level.GetComponent<LevelSingleUI>().SetLevelData(i);
@@ -51,6 +43,11 @@ public class LevelUI : MonoBehaviour {
 
     public void Show() {
         gameObject.SetActive(true);
+    }
+
+    public void ShowLoadedLevel() {
+        UpdateLevelVisual();
+        Show();
     }
 
     private void Hide() {
