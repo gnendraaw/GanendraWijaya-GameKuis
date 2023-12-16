@@ -35,8 +35,11 @@ public class LevelUI : MonoBehaviour {
 
         int levelCount = _selectLevelManager.SelectedLevelSO.SelectedLevelPack.BanyakLevel;
         for (int i = 0; i < levelCount; i++) {
+            int highestLevel = PlayerProgressManager.Instance.GetLevelPackLevelProgressByName(_selectLevelManager.SelectedLevelSO.SelectedLevelPack.LevelPackName);
+            bool isLocked = i > highestLevel;
+
             Transform level = Instantiate(_levelTemplate, _levelContainer);
-            level.GetComponent<LevelSingleUI>().SetLevelData(i);
+            level.GetComponent<LevelSingleUI>().SetLevelData(i, isLocked);
             level.gameObject.SetActive(true);
         }
     }

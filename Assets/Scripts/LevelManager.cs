@@ -22,10 +22,14 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void UI_Jawaban_OnAnyAnswerSelected(string jawaban, bool isCorrect) {
-        // Grant player coins when the selected answer is correct
         if (!isCorrect) return;
 
-        GrantCoin();
+        if (_indexSoal >= GetLatestLevelPlayed()) {
+            int coinToAdd = 20;
+
+            PlayerProgressManager.Instance.AddPlayerCoin(coinToAdd);
+            PlayerProgressManager.Instance.SavePlayerProgress();
+        }
     }
 
     private void InitLevelData() {
@@ -50,14 +54,17 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    private void GrantCoin() {
-        int coinToAdd = 20;
-        PlayerProgressManager.Instance.PlayerProgress.coins += coinToAdd;
-        PlayerProgressManager.Instance.SavePlayerProgress();
-    }
-
     private void SetLatestPlayerLevel() {
         _selectedLevelSO.levelIndex = _indexSoal;
+
+        if (GetLatestLevelPlayed() < _indexSoal) {
+            PlayerProgressManager.Instance.SetLevelPackLevelProgress(_selectedLevelSO.SelectedLevelPack.LevelPackName, _indexSoal);
+            PlayerProgressManager.Instance.SavePlayerProgress();
+        }
+    }
+
+    private int GetLatestLevelPlayed() {
+        return PlayerProgressManager.Instance.GetLevelPackLevelProgressByName(_selectedLevelSO.SelectedLevelPack.LevelPackName);
     }
 
     public void NextLevel() {

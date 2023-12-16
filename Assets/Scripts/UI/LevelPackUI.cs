@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,18 @@ public class LevelPackUI : MonoBehaviour {
     [SerializeField] private Transform _levelPackTemplate;
 
     private void Start() {
+        PlayerProgressManager.OnPlayerProgressUpdated += PlayerProgressManager_OnPlayerProgressUpdated;
+
         _levelPackTemplate.gameObject.SetActive(false);
 
+        UpdateLevelPackVisual();
+    }
+
+    private void OnDestroy() {
+        PlayerProgressManager.OnPlayerProgressUpdated -= PlayerProgressManager_OnPlayerProgressUpdated;
+    }
+
+    private void PlayerProgressManager_OnPlayerProgressUpdated() {
         UpdateLevelPackVisual();
     }
 
@@ -19,9 +30,16 @@ public class LevelPackUI : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        foreach (LevelPackKuisSO levelPackSO in _selectLevelManager.GetLevelPackSOList()) {
+        for (int i = 0; i < _selectLevelManager.GetLevelPackSOList().Count; i++) {
             Transform levelPack = Instantiate(_levelPackTemplate, _levelPackContainer);
-            levelPack.GetComponent<LevelPackSingleUI>().SetLevelPackData(levelPackSO);
+
+            LevelPackKuisSO levelPackSO = _selectLevelManager.GetLevelPackSOList()[i];
+
+            bool isLevelLocked = false;
+            if (i != 0) isLevelLocked = PlayerProgressManager.Instance.GetLevelPackLevelProgressByName(levelPackSO.LevelPackName) < 0;
+
+            // Set the first level pack to unlocked
+            levelPack.GetComponent<LevelPackSingleUI>().SetLevelPackData(levelPackSO, isLevelLocked);
             levelPack.gameObject.SetActive(true);
         }
     }

@@ -13,13 +13,15 @@ public class PlayerProgressManager : MonoBehaviour {
     private const string SAVE_FILE_NAME = "PlayerProgress.xyz";
     private const string SAVE_FILE_DIRECTORY = "Data";
 
-    private PlayerProgress playerProgress = new PlayerProgress();
+    private PlayerProgress playerProgress = new PlayerProgress(0);
     public PlayerProgress PlayerProgress {
         get => playerProgress;
         set {
             playerProgress = value;
         }
     }
+
+    [SerializeField] private List<LevelPackKuisSO> _levelPackSOList;
 
     private void Awake() {
         if (Instance == null) {
@@ -28,13 +30,20 @@ public class PlayerProgressManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        Debug.Log($"{Application.persistentDataPath}/{SAVE_FILE_DIRECTORY}/{SAVE_FILE_NAME}");
+
         DontDestroyOnLoad(gameObject);
 
         LoadPlayerProgress();
     }
 
     private void SetInitialPlayerProgress() {
-        playerProgress.coins = 0;
+        // Add level pack progress into player progress
+        foreach (LevelPackKuisSO levelPack in _levelPackSOList) {
+            PlayerProgress.levelProgress.Add(levelPack.LevelPackName, -1);
+        }
+
+        // Save player progress in external file
         SavePlayerProgress();
     }
 
@@ -71,6 +80,18 @@ public class PlayerProgressManager : MonoBehaviour {
         stream.Close();
 
         OnPlayerProgressUpdated?.Invoke();
+    }
+
+    public void SetLevelPackLevelProgress(string levelPackName, int highestLevelProgress) {
+        PlayerProgress.levelProgress[levelPackName] = highestLevelProgress;
+    }
+
+    public void AddPlayerCoin(int coinToAdd) {
+        PlayerProgress.coins += coinToAdd;
+    }
+
+    public int GetLevelPackLevelProgressByName(string name) {
+        return PlayerProgress.levelProgress[name];
     }
 }
 

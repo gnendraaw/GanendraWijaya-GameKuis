@@ -849,7 +849,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402bb854b8a6b784094c14d1a81bbc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerProgressSO: {fileID: 11400000, guid: 2a35f09df7be0f4469a435d8b4f55ac6, type: 2}
+  _levelPackSOList:
+  - {fileID: 11400000, guid: e5752ad39b2391b48a1ea7b94ba9db25, type: 2}
+  - {fileID: 11400000, guid: 1538f57c5beda2b4392dd405d9261f24, type: 2}
+  - {fileID: 11400000, guid: b9d86fe1ef702c444b0d72c33d6d7d65, type: 2}
+  - {fileID: 11400000, guid: 781bcf6aa55bbbf49b1f309c69e97d5a, type: 2}
 --- !u!4 &1900200449
 Transform:
   m_ObjectHideFlags: 0
