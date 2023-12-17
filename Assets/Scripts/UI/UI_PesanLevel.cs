@@ -1,13 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class UI_PesanLevel : MonoBehaviour {
+    private const string IS_WIN_PARAM = "IsWin";
+
     [SerializeField] private TextMeshProUGUI _tempatPesan;
     [SerializeField] private GameObject _winOption;
     [SerializeField] private GameObject _loseOption;
+
+    [Header("LEVEL MESSAGE ANIMATION")]
+    [SerializeField] private Animator _animator;
 
     public string Pesan {
         get => _tempatPesan.text;
@@ -23,8 +27,12 @@ public class UI_PesanLevel : MonoBehaviour {
 
     private void UI_Jawaban_OnAnyAnswerSelected(string answer, bool isCorrect) {
         Pesan = $"Your Answer is {isCorrect}! (Answer: {answer})";
+
         ToggleWinLoseOption(isCorrect);
+
         gameObject.SetActive(true);
+
+        _animator.SetBool(IS_WIN_PARAM, isCorrect);
     }
 
     private void ToggleWinLoseOption(bool isCorrect) {
