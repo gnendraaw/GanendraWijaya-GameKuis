@@ -33,6 +33,11 @@ public class UI_PesanLevel : MonoBehaviour {
         gameObject.SetActive(true);
 
         _animator.SetBool(IS_WIN_PARAM, isCorrect);
+
+        // Play SFX
+        if (!isCorrect) SFX.Instance.PlayWrongAnswerSound();
+        else SFX.Instance.PlayCorrectAnswerSound();
+        
     }
 
     private void ToggleWinLoseOption(bool isCorrect) {

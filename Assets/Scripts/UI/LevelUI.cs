@@ -19,6 +19,9 @@ public class LevelUI : MonoBehaviour {
         Instance = this;
 
         _closeButton.onClick.AddListener(() => {
+            // Play SFX
+            SFX.Instance.PlayButtonClickSound();
+
             OnLevelUIClosed?.Invoke();
         });
     }

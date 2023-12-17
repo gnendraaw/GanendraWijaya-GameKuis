@@ -52,7 +52,10 @@ public class LevelPackSingleUI : MonoBehaviour {
 
     private void SetButtonCallback(Action callBack) {
         GetComponent<Button>().onClick.RemoveAllListeners();
-        GetComponent<Button>().onClick.AddListener(() => callBack());
+        GetComponent<Button>().onClick.AddListener(() => {
+            SFX.Instance.PlayButtonClickSound();
+            callBack();
+        });
     }
 }
 

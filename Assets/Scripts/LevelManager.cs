@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour {
     private int _indexSoal = 0;
 
     private void Start() {
+        // Play BGM
+        BGM.Instance.PlayKuisBGM();
+
         UI_Jawaban.OnAnyAnswerSelected += UI_Jawaban_OnAnyAnswerSelected;
 
         InitLevelData();

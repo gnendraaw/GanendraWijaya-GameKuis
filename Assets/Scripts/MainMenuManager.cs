@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour {
     [SerializeField] private Button _startButton;
 
-    private void Awake() {
+    private void Start() {
         _startButton.onClick.AddListener(() => {
+            SFX.Instance.PlayButtonClickSound();
             Loader.LoadScene(Loader.TargetScene.SelectLevelScene);
         });
     }

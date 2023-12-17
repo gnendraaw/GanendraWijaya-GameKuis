@@ -31,10 +31,16 @@ public class ConfirmMessageUI : MonoBehaviour {
     }
 
     private void SelectLevelManager_OnUnlockSuccess() {
+        // Play SFX
+        SFX.Instance.PlaySuccessAudio();
+
         Hide();
     }
 
     private void SelectLevelManager_OnUnlockLevel(string message, Action confirmCallback, bool isSuccess) {
+        // Play SFX
+        SFX.Instance.PlayQuestionSound();
+
         _messageText.text = message;
 
         _failedOptions.SetActive(!isSuccess);

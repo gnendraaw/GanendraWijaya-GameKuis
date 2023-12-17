@@ -16,6 +16,11 @@ public class SelectLevelManager : MonoBehaviour {
         return _levelPackSOList;
     }
 
+    public void Start() {
+        // Play BGM
+        BGM.Instance.PlayMenuBGM();
+    }
+
     public void ChangeSelectedLevelPack(LevelPackKuisSO selectedLevelPack) {
         _selectedLevelSO.SelectedLevelPack = selectedLevelPack;
         Debug.Log("Selected Level Pack: " + _selectedLevelSO.SelectedLevelPack.LevelPackName);

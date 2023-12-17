@@ -13,6 +13,7 @@ public class LevelSingleUI : MonoBehaviour {
         _levelText.text = (index+1).ToString();
 
         GetComponent<Button>().onClick.AddListener(() => {
+            SFX.Instance.PlayButtonClickSound();
             _selectLevelManager.ChangeSelectedLevel(index);
         });
 
