@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelPackSingleUI : MonoBehaviour {
+    public static event Action OnAnyLevelPackSelected;
+
     [SerializeField] private LevelUI _levelUI;
     [SerializeField] private LevelPackUI _levelPackUI;
     [SerializeField] private SelectLevelManager _selectLevelManager;
@@ -45,8 +47,7 @@ public class LevelPackSingleUI : MonoBehaviour {
         // Change selected level pack
         _selectLevelManager.ChangeSelectedLevelPack(levelPackSO);
 
-        _levelUI.ShowLoadedLevel();
-        _levelPackUI.Hide();
+        OnAnyLevelPackSelected?.Invoke();
     }
 
     private void SetButtonCallback(Action callBack) {

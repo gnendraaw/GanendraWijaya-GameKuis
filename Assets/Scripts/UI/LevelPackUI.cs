@@ -4,11 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelPackUI : MonoBehaviour {
+    private const string TO_LEVELPACKS_PARAM = "ToLevelPacks";
+    private const string TO_LEVELS_PARAM = "ToLevels";
+
     [SerializeField] private SelectLevelManager _selectLevelManager;
     [SerializeField] private Transform _levelPackContainer;
     [SerializeField] private Transform _levelPackTemplate;
 
+    [Header("LEVEL UI ANIMATIONS")]
+    [SerializeField] private Animator _animator;
+
     private void Start() {
+        LevelUI.OnLevelUIClosed += LevelUI_OnLevelUIClosed;
+
+        LevelPackSingleUI.OnAnyLevelPackSelected += LevelPackSingleUI_OnAnyLevelPackSelected;
+
         PlayerProgressManager.OnPlayerProgressUpdated += PlayerProgressManager_OnPlayerProgressUpdated;
 
         _levelPackTemplate.gameObject.SetActive(false);
@@ -16,7 +26,19 @@ public class LevelPackUI : MonoBehaviour {
         UpdateLevelPackVisual();
     }
 
+    private void LevelUI_OnLevelUIClosed() {
+        _animator.SetTrigger(TO_LEVELPACKS_PARAM);
+    }
+
+    private void LevelPackSingleUI_OnAnyLevelPackSelected() {
+        _animator.SetTrigger(TO_LEVELS_PARAM);
+    }
+
     private void OnDestroy() {
+        LevelUI.OnLevelUIClosed -= LevelUI_OnLevelUIClosed;
+
+        LevelPackSingleUI.OnAnyLevelPackSelected -= LevelPackSingleUI_OnAnyLevelPackSelected;
+
         PlayerProgressManager.OnPlayerProgressUpdated -= PlayerProgressManager_OnPlayerProgressUpdated;
     }
 

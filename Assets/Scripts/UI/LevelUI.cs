@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour {
     public static LevelUI Instance { get; private set; }
+
+    public static event Action OnLevelUIClosed;
 
     [SerializeField] private SelectLevelManager _selectLevelManager;
     [SerializeField] private LevelPackUI _levelPackUI;
@@ -16,15 +19,22 @@ public class LevelUI : MonoBehaviour {
         Instance = this;
 
         _closeButton.onClick.AddListener(() => {
-            _levelPackUI.Show();
-            Hide();
+            OnLevelUIClosed?.Invoke();
         });
     }
 
     private void Start() {
-        _levelTemplate.gameObject.SetActive(false);
+        LevelPackSingleUI.OnAnyLevelPackSelected += LevelPackSingleUI_OnAnyLevelPackSelected;
 
-        Hide();
+        _levelTemplate.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy() {
+        LevelPackSingleUI.OnAnyLevelPackSelected -= LevelPackSingleUI_OnAnyLevelPackSelected;
+    }
+
+    private void LevelPackSingleUI_OnAnyLevelPackSelected() {
+        UpdateLevelVisual();
     }
 
     private void UpdateLevelVisual() {
@@ -46,11 +56,6 @@ public class LevelUI : MonoBehaviour {
 
     public void Show() {
         gameObject.SetActive(true);
-    }
-
-    public void ShowLoadedLevel() {
-        UpdateLevelVisual();
-        Show();
     }
 
     private void Hide() {
